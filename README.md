@@ -10,7 +10,7 @@ Create a configuration file called ~/.config/chezmoi/chezmoi.toml defining varia
 
 ```ini
 [data]
-    email = "me@home.org"
+    email = "Joerg.Rosenkranz@gmail.com"
 ```
 
 Apply the files:
