@@ -1,0 +1,96 @@
+[user]
+	name = Joerg Rosenkranz
+	email = {{ .email }}
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = always
+
+[alias]
+	ai = add --interactive
+	amend = commit --amend -C HEAD
+	ca = commit --amend
+	cc = "!f() { git checkout -b change/$(git rev-parse --abbrev-ref HEAD)/$1; }; f"
+	changes = diff --name-status -r
+	co = checkout
+	l = log --oneline --decorate
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit
+	p = "!f() { git format-patch -1 --stdout $1 | git am -3; }; f"
+	undo = reset --soft HEAD^
+	wd = diff --color-words
+	wds = diff --color-words --staged
+	ff = merge --ff-only
+	mf = "!f() { git merge --ff-only $1 && git branch -d $1; }; f"
+	ci = commit
+	st = status -sb
+	bd = branch -d
+	zip = "!!f() { git archive -o $1.zip HEAD -- $1; }; f"
+	fn = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=local --grep
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	unignore = update-index --no-assume-unchanged
+	ignored = !git ls-files -v | grep '^[a-z]'
+	fixup = !sh -c 'git commit --fixup=$1' -
+	squash = !sh -c 'git commit --squash=$1' -
+	ri = rebase --interactive --autosquash
+
+[push]
+	default = tracking
+
+{{ if eq .chezmoi.os "darwin" -}}
+[core]
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+{{ else if eq .chezmoi.os "linux" -}}
+[core]
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+{{ else if eq .chezmoi.os "windows" -}}
+[core]
+	autocrlf = false
+	safecrlf = false
+	editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
+	ignorecase = true
+	whitespace = cr-at-eol
+	excludesfile = C:\\Users\\{{ .chezmoi.username }}\\Documents\\gitignore_global.txt
+	quotepath = false
+[merge]
+	tool = kdiff3
+	renamelimit = 10000
+[mergetool "kdiff3"]
+	path = C:/Program Files/KDiff3/kdiff3.exe
+[diff]
+	guitool = winmerge
+	tool = winmerge
+[difftool "winmerge"]
+	path = c:/Program Files (x86)/winmerge/winmergeu.exe
+	cmd = \"c:/Program Files (x86)/winmerge/winmergeu.exe\" \"$LOCAL\" \"$REMOTE\"
+[difftool "WinMerge"]
+	path = C:/Program Files (x86)/WinMerge/WinMergeU.exe
+	cmd = 'C:/Program Files (x86)/WinMerge/WinMergeU.exe' /e /x /u $LOCAL $REMOTE
+[mergetool "WinMerge"]
+	path = C:/Program Files (x86)/WinMerge/WinMergeU.exe
+	cmd = 'C:/Program Files (x86)/WinMerge/WinMergeU.exe' /e /x /u $LOCAL $REMOTE $MERGED
+	trustExitCode = false
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files (x86)/WinMerge/WinMergeU.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/KDiff3/kdiff3.exe' \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
+	trustExitCode = true
+
+[mergetool "semantic"]
+	path = C:/Program Files/PlasticSCM4/semanticmerge/semanticmergetool.exe
+	keepBackup = false
+	trustExitCode = false
+	cmd = \"C:/Program Files/PlasticSCM4/semanticmerge/semanticmergetool.exe\" -b=\"$BASE\" -d=\"$LOCAL\" -s=\"$REMOTE\" -r=\"$MERGED\" -l=csharp -emt=\"mergetool.exe -b=\"\"@basefile\"\" -bn=\"\"@basesymbolic\"\" -s=\"\"@sourcefile\"\" -sn=\"\"@sourcesymbolic\"\" -d=\"\"@destinationfile\"\" -dn=\"\"@destinationsymbolic\"\" -r=\"\"@output\"\" -t=\"\"@filetype\"\" -i=\"\"@comparationmethod\"\" -e=\"\"@fileencoding\"\"\" -edt=\"mergetool.exe  -s=\"\"@sourcefile\"\" -sn=\"\"@sourcesymbolic\"\" -d=\"\"@destinationfile\"\" -dn=\"\"@destinationsymbolic\"\" -t=\"\"@filetype\"\" -i=\"\"@comparationmethod\"\" -e=\"\"@fileencoding\"\"\"
+
+[am]
+	keepcr = true
+[mergetool]
+	keepBackup = false
+
+[credential]
+	helper = manager
+
+[i18n]
+	commitencoding = utf-8
+
+{{ end -}}
