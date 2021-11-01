@@ -50,7 +50,7 @@
 	editor = 'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin
 	ignorecase = true
 	whitespace = cr-at-eol
-	excludesfile = C:\\Users\\{{ .chezmoi.username }}\\Documents\\gitignore_global.txt
+	excludesfile = {{ .chezmoi.homeDir }}\\Documents\\gitignore_global.txt
 	quotepath = false
 [merge]
 	tool = kdiff3
