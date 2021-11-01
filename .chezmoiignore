@@ -1,5 +1,4 @@
 README.md
 {{ if eq .chezmoi.os "windows" -}}
-.oh-my-zsh/
 .zshrc
 {{ end -}}
