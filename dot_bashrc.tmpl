@@ -1,0 +1,114 @@
+# Prompt
+
+PS1='\[\033]0;${PWD//[^[:ascii:]]/?}\007\]' # set window title
+PS1="$PS1"'\n'                 # new line
+PS1="$PS1"'\[\033[32m\]'       # change to green
+PS1="$PS1"'\h '                # host<space>
+PS1="$PS1"'\[\033[33m\]'       # change to brownish yellow
+PS1="$PS1"'\w'                 # current working directory
+if test -z "$WINELOADERNOEXEC"
+then
+	GIT_EXEC_PATH="$(git --exec-path 2>/dev/null)"
+	COMPLETION_PATH="${GIT_EXEC_PATH%/libexec/git-core}"
+	COMPLETION_PATH="${COMPLETION_PATH%/lib/git-core}"
+	COMPLETION_PATH="$COMPLETION_PATH/share/git/completion"
+	if test -f "$COMPLETION_PATH/git-prompt.sh"
+	then
+		. "$COMPLETION_PATH/git-completion.bash"
+		. "$COMPLETION_PATH/git-prompt.sh"
+		PS1="$PS1"'\[\033[36m\]'  # change color to cyan
+		PS1="$PS1"'`__git_ps1`'   # bash function
+	fi
+fi
+PS1="$PS1"'\[\033[0m\]'        # change color
+PS1="$PS1"'\n'                 # new line
+PS1="$PS1"'$ '                 # prompt: always $
+
+# Path
+PATH=$PATH:~/.cargo/bin
+
+# Vars
+# export REQUESTS_CA_BUNDLE=~/quest-forest-root.crt.cer
+
+# Alias definitions
+
+{{ if eq .chezmoi.os "windows" -}}
+# alias msbuild='/c/Windows/Microsoft.NET/Framework64/v4.0.30319/MSBuild.exe -m -P:VI_PROJECTDIR=`git rev-parse --show-toplevel`'
+# alias msbuild32='/c/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe -m -P:VI_PROJECTDIR=`git rev-parse --show-toplevel`'
+# alias msbuild="/c/Program\ Files\ \(x86\)/MSBuild/14.0/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
+# alias msbuild="/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2017/Enterprise/MSBuild/15.0/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
+alias msbuild="/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
+alias msbuildpreview="/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Preview/MSBuild/Current/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
+
+alias hotfix='msbuild Build.proj -T:IncrementHotfix'
+alias hierarchy="msbuild \$(git rev-parse --show-toplevel)/Build/Hierarchy.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
+alias hierarchypreview="msbuildpreview \$(git rev-parse --show-toplevel)/Build/Hierarchy.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
+alias buildrel="hierarchy"
+alias builddbg="hierarchy -P:VICFG=DEBUG -P:BUILD_WEB=no"
+alias builddbgpreview="hierarchypreview -P:VICFG=DEBUG -P:BUILD_WEB=no"
+alias builddbgweb="hierarchy -P:VICFG=DEBUG"
+alias all="msbuild \$(git rev-parse --show-toplevel)/Build/Build.proj -P:PostBuildEvent=\"\" -nodeReuse:False"
+alias allrel="all"
+alias alldbg="all -P:VICFG=DEBUG -P:BUILD_WEB=no -P:BuildInParallel=true"
+alias alldbgweb="all -P:VICFG=DEBUG -P:BuildInParallel=true"
+alias blame=TortoiseGitBlame.exe
+alias sc="\$(git rev-parse --show-toplevel)/Assemblies/SourceQode.exe --LoadHotfix=\"\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')\""
+alias re="\$(git rev-parse --show-toplevel)/Assemblies/ResXLanguageEditor.exe \"\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')\""
+alias hf=build-hotfix
+{{ end -}}
+
+alias root="cd \$(git rev-parse --show-toplevel)"
+alias lastbranch="git reflog | grep -m 1 -oP '(?<=checkout: moving from )\K.*(?= to)'"
+alias rm-lastbranch="git branch -d \$(lastbranch)"
+
+alias runmono="docker run -it --rm -v $PWD:/asm -w /asm mono:latest"
+alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/core/runtime:latest"
+
+alias cb=change-branch
+__git_complete cb _worktrees
+
+docker()
+{
+	export MSYS_NO_PATHCONV=1
+	("docker.exe" "$@")
+	export MSYS_NO_PATHCONV=0
+}
+
+build-hotfix()
+{
+	echo "Incrementing and building hotfix DLL"...
+
+	regex="#[0-9]+:"
+	msg=$(git log --pretty=%s -1)
+
+	if [[ $msg =~ $regex ]]
+	then
+		hotfix_msg="${BASH_REMATCH[0]} Increment"
+	else
+		echo "$msg doesn't match pattern #<num>:" >&2
+		return 1
+	fi
+
+	hotfix && git ci -m "$hotfix_msg" . && buildrel && explorer Setup
+
+	echo "Do not forget to commit to SVN"
+}
+
+change-branch() {
+	if [[ ! "$1" ]]
+	then
+		echo "You need to provide a branch name"
+		return 1
+	fi
+
+	BRANCH_ROOT="$(git worktree list | grep "\[$1\]" | cut -d ' ' -f1)"
+	RELATIVE_PATH="$(git rev-parse --show-prefix)"
+
+	NEW_PATH="$BRANCH_ROOT/$RELATIVE_PATH"
+
+	cd "$NEW_PATH"
+}
+
+_worktrees() {
+	__gitcomp "$(git worktree list | sed 's/^.*\[\(.*\)\].*$/\1/g' | grep "^$1")"
+}
