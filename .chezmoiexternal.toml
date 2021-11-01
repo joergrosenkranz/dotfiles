@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.os "windows" -}}
+{{ if ne .chezmoi.os "windows" -}}
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
