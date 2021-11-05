@@ -4,7 +4,8 @@ if ($host.Name -eq 'ConsoleHost')
     Import-Module PSReadLine
     Set-PSReadLineOption -PredictionSource History
     Set-PSReadLineOption -PredictionViewStyle ListView
-    Set-PSReadLineOption -EditMode Windows
+    Set-PSReadLineOption -EditMode Emacs
+    # Set-PSReadLineKeyHandler -Key Tab -Function Complete
 }
 
 # Git handling
