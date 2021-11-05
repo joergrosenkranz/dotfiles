@@ -2,3 +2,7 @@ README.md
 {{ if eq .chezmoi.os "windows" -}}
 .zshrc
 {{ end -}}
+{{ if ne .chezmoi.os "windows" -}}
+AppData/
+Documents/
+{{ end -}}
