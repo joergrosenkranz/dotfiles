@@ -18,3 +18,4 @@ oh-my-posh --init --shell pwsh --config ~/.powershell/oh-my-posh.json | Invoke-E
 # Icons in dir
 Import-Module -Name Terminal-Icons
 
+. $PSScriptRoot\aliases.ps1
