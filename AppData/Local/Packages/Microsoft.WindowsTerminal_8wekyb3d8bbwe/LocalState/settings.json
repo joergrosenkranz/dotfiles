@@ -80,14 +80,6 @@
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore",
                 "startingDirectory": "C:\\git\\Main"
-            },
-            {
-                "colorScheme": "Campbell",
-                "commandline": "C:\\Users\\joergr\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe Start-Process -Verb RunAs wt",
-                "guid": "{deb50038-5089-4928-b7f8-f0f51067adf7}",
-                "icon": "🔑",
-                "name": "PowerShell (Admin)",
-                "startingDirectory": "C:\\git\\Main"
             }
         ]
     },
