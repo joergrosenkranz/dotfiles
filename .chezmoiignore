@@ -5,4 +5,5 @@ README.md
 {{ if ne .chezmoi.os "windows" -}}
 AppData/
 Documents/
+.powershell/
 {{ end -}}
