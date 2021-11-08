@@ -24,28 +24,9 @@
                     "foreground": "#fefefe",
                     "background": "#773918",
                     "properties": {
+                        "display_status": false,
                         "display_stash_count": false,
-                        "display_upstream_icon": false,
-                        "status_colors_enabled": true,
-                        "local_changes_color": "#9e3f00",
-                        "ahead_and_behind_color": "#b72f10",
-                        "behind_color": "#993f0b",
-                        "ahead_color": "#a6450c",
-                        "stash_count_icon": "\uF692 "
-                    }
-                },
-                {
-                    "type": "dotnet",
-                    "style": "powerline",
-                    "powerline_symbol": "",
-                    "invert_powerline": false,
-                    "foreground": "#ffffff",
-                    "background": "#4b7042",
-                    "leading_diamond": "",
-                    "trailing_diamond": "",
-                    "properties": {
-                        "display_version": true,
-                        "prefix": "  "
+                        "display_upstream_icon": false
                     }
                 },
                 {
