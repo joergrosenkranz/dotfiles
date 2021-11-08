@@ -14,7 +14,8 @@
                         "prefix": "   ",
                         "home_icon": "~",
                         "folder_separator_icon": " \uE0b1 ",
-                        "style": "folder"
+                        "style": "agnoster_short",
+                        "max_depth": 5
                     }
                 },
                 {
