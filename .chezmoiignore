@@ -1,4 +1,5 @@
 README.md
+.oh-my-zsh/cache/
 {{ if eq .chezmoi.os "windows" -}}
 .zshrc
 {{ end -}}
