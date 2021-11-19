@@ -1,16 +1,16 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
+    "actions": 
     [
         {
-            "command":
+            "command": 
             {
                 "action": "copy"
             },
             "keys": "enter"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "splitPane",
                 "split": "vertical"
@@ -22,25 +22,25 @@
             "keys": "ctrl+v"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "newTab"
             },
             "keys": "ctrl+t"
         }
     ],
-    "defaultProfile": "{5d886f68-d1de-4075-bea4-11f3a1782fbf}",
-    "profiles":
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "profiles": 
     {
-        "defaults":
+        "defaults": 
         {
-            "font":
+            "font": 
             {
                 "face": "Iosevka Term",
                 "size": 10
             }
         },
-        "list":
+        "list": 
         [
             {
                 "commandline": "\"C:\\Program Files\\Git\\bin\\sh.exe\" --login -i\"\"",
@@ -83,7 +83,7 @@
             }
         ]
     },
-    "schemes":
+    "schemes": 
     [
         {
             "background": "#0C0C0C",
