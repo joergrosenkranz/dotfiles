@@ -62,6 +62,11 @@ alias runmono="docker run -it --rm -v $PWD:/asm -w /asm mono:latest"
 alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/core/runtime:latest"
 
 alias cb=change-branch
+
+_worktrees() {
+	__gitcomp "$(git worktree list | sed 's/^.*\[\(.*\)\].*$/\1/g' | grep "^$1")"
+}
+
 __git_complete cb _worktrees
 
 docker()
@@ -104,8 +109,4 @@ change-branch() {
 	NEW_PATH="$BRANCH_ROOT/$RELATIVE_PATH"
 
 	cd "$NEW_PATH"
-}
-
-_worktrees() {
-	__gitcomp "$(git worktree list | sed 's/^.*\[\(.*\)\].*$/\1/g' | grep "^$1")"
 }
