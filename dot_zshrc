@@ -65,7 +65,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cargo colored-man-pages colorize dotnet github jira vagrant virtualenv pip python brew macos zsh-syntax-highlighting docker docker-compose ripgrep z)
+plugins=(git rust colored-man-pages colorize dotnet github jira vagrant virtualenv pip python brew macos zsh-syntax-highlighting docker docker-compose ripgrep z)
 
 source $ZSH/oh-my-zsh.sh
 
