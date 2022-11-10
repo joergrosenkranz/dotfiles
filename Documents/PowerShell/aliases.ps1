@@ -1,19 +1,14 @@
 # Alias definitions
 
-function MsBuild2019 {
-    & "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
-}
-
 function MsBuild2022 {
-    & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
+    & "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
 }
 
 function Get-GitRoot () {
     return $(git rev-parse --show-toplevel)
 }
 
-Set-Alias -Name msbuild -Value MsBuild2019
-Set-Alias -Name msbuildpreview -Value MsBuild2022
+Set-Alias -Name msbuild -Value MsBuild2022
 
 function Alias-Hierarchy {
     $root = Get-GitRoot
@@ -134,10 +129,24 @@ function Change-Branch {
 	Set-Location "$NewPath"
 }
 
-# Microsoft.PowerShell.Core\Register-ArgumentCompleter -CommandName Change-Branch -ParameterName Branch -ScriptBlock {
-#     param($Command, $Parameter, $WordToComplete, $CommandAst, $FakeBoundParams)
+Microsoft.PowerShell.Core\Register-ArgumentCompleter -CommandName Change-Branch -ParameterName Branch -ScriptBlock {
+    param($Command, $Parameter, $WordToComplete, $CommandAst, $FakeBoundParams)
 
-#     $(& git worktree list | select-string "$WordToComplate" -SimpleMatch | % { $_.Line.Split(' ')[0] })
-# }
+    if ( $WordToComplete ) {
+        $matching = git worktree list | select-string -Pattern '$WordToComplete' -SimpleMatch
+    } else {
+        $matching = git worktree list | select-string -Pattern '.*'
+    }
+
+    $result =  $matching | ForEach-Object{ [regex]::matches($_.Line, '\[([^\]]+)\]').groups[1].value | Sort-Object }
+    # $result =  $matching | ForEach-Object {
+    #     $branch = [regex]::matches($_.Line, '\[([^\]]+)\]').groups[1].value
+    #     $dir = $_.Line.Split(' ')[0]
+
+    #     New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $branch, $branch, "ParameterValue", $dir
+    # }
+
+    $result
+}
 
 Set-Alias -Name cb -Value Change-Branch
