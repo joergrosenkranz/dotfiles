@@ -22,3 +22,8 @@ To update the files on any machine:
 ```sh
 chezmoi update
 ```
+
+A potential chocolatey install:
+```sh
+cinst -y 7zip 7zip.install ag astrogrep autohotkey autohotkey.install autohotkey.portable autoruns azure-cli chezmoi croc devaudit devtoys dive dnspy docfx docker-compose docker-engine dotnet-7.0-sdk dotnet-7.0-sdk-1xx dotnetfx FiraCode Firefox fusionplusplus gimp gitui GitVersion.Portable graphviz hxd ilspy jetbrains-rider kdiff3 keepassxc kubernetes-cli lazygit MarkdownMonster.Portable mdcat mRemoteNG msbuild-structured-log-viewer nodejs-lts notepadplusplus notepadplusplus.install NugetPackageExplorer oh-my-posh perfview powertoys procexp procmon ripgrep rsync sharex SQLite tailblazer tortoisegit winmerge wireshark zoomit
+```
