@@ -23,7 +23,7 @@ function Alias-HierarchyPreview {
     $current = $(git rev-parse --show-prefix).Replace('/', '\').Replace('.', '_').TrimEnd('\')
     msbuildpreview "$root\Build\Hierarchy.proj" "-P:PostBuildEvent=" "-T:$current" @args
 }
-Set-Alias -Name hierarchy -Value Alias-Hierarchy
+Set-Alias -Name hierarchypreview -Value Alias-HierarchyPreview
 
 function Alias-BuildDbg {
     hierarchy "-P:VICFG=DEBUG" "-P:BUILD_WEB=no" @args
@@ -39,6 +39,28 @@ function Alias-BuildDbgWeb {
     hierarchy "-P:VICFG=DEBUG" @args
 }
 Set-Alias -Name builddbgweb -Value Alias-BuildDbgWeb
+
+# ----
+
+function Alias-HierarchyNC {
+    $root = Get-GitRoot
+    $current = $(git rev-parse --show-prefix).Replace('/', '\').Replace('.', '_').TrimEnd('\')
+    msbuild "$root\Build\Hierarchy.netcore.proj" "-P:PostBuildEvent=" "-P:NetCore=true" "-T:$current" @args
+}
+Set-Alias -Name hierarchync -Value Alias-HierarchyNC
+Set-Alias -Name buildrelnc -Value Alias-HierarchyNC
+
+function Alias-BuildDbgNC {
+    hierarchync "-P:VICFG=DEBUG" "-P:BUILD_WEB=no" @args
+}
+Set-Alias -Name builddbgnc -Value Alias-BuildDbgNC
+
+function Alias-BuildDbgWebNC {
+    hierarchync "-P:VICFG=DEBUG" @args
+}
+Set-Alias -Name builddbgwebnc -Value Alias-BuildDbgWebNC
+
+# ----
 
 function Alias-All {
     $root = Get-GitRoot
@@ -57,6 +79,27 @@ function Alias-AllDbgWeb {
 }
 Set-Alias -Name alldbgweb -Value Alias-AllDbgWeb
 
+# ----
+
+function Alias-AllNC {
+    $root = Get-GitRoot
+    msbuild "$root\Build\Build.proj" "-P:PostBuildEvent=" "-P:NetCore=true" "-nodeReuse:False" @args
+}
+Set-Alias -Name allnc -Value Alias-AllNC
+Set-Alias -Name allrelnc -Value Alias-AllNC
+
+function Alias-AllDbgNC {
+    allnc "-P:VICFG=DEBUG" "-P:BUILD_WEB=no" "-P:BuildInParallel=true" @args
+}
+Set-Alias -Name alldbgnc -Value Alias-AllDbgNC
+
+function Alias-AllDbgWebNC {
+    allnc "-P:VICFG=DEBUG" "-P:BuildInParallel=true" @args
+}
+Set-Alias -Name alldbgwebnc -Value Alias-AllDbgWebNC
+
+# ----
+
 function Alias-SourceQuode {
     $root = Get-GitRoot
 
@@ -64,6 +107,14 @@ function Alias-SourceQuode {
 }
 
 Set-Alias -Name sc -Value Alias-SourceQuode
+
+function Alias-SourceQuodeNC {
+    $root = Get-GitRoot
+
+    & "$root\Assemblies\SourceQodeNC.exe" "--LoadHotfix=$($root.Replace('/', '\'))"
+}
+
+Set-Alias -Name scnc -Value Alias-SourceQuodeNC
 
 function Alias-ResxEditor {
     $root = Get-GitRoot
