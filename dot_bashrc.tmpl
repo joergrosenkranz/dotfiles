@@ -42,6 +42,10 @@ if (uname -a | grep WSL2 > /dev/null); then
     fi
 fi
 
+# Dotnet
+if [ -d ~/.dotnet ]; then
+    PATH=$PATH:~/.dotnet
+fi
 
 # Vars
 # export REQUESTS_CA_BUNDLE=~/quest-forest-root.crt.cer
