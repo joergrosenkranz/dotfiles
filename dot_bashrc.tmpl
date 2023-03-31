@@ -35,6 +35,8 @@ fi
 
 # WSL2 specialties
 if (uname -a | grep WSL2 > /dev/null); then
+    # create an alias for docker to avoid using the Windows binary
+    alias docker /usr/bin/docker
     
     # start Docker daemon
     if [ -n "`service docker status | grep not`" ]; then
