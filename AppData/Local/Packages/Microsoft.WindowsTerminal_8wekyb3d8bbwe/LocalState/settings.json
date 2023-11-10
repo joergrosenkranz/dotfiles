@@ -1,17 +1,25 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": 
+    "actions":
     [
         {
-            "command": 
+            "command":
+            {
+                "action": "splitPane",
+                "split": "right"
+            },
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "command":
             {
                 "action": "copy"
             },
             "keys": "enter"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "newTab"
             },
@@ -20,28 +28,20 @@
         {
             "command": "paste",
             "keys": "ctrl+v"
-        },
-        {
-            "command": 
-            {
-                "action": "splitPane",
-                "split": "right"
-            },
-            "keys": "ctrl+shift+t"
         }
     ],
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
-            "font": 
+            "font":
             {
                 "face": "Iosevka Term",
-                "size": 10
+                "size": 10.0
             }
         },
-        "list": 
+        "list":
         [
             {
                 "commandline": "\"C:\\Program Files\\Git\\bin\\sh.exe\" --login -i\"\"",
@@ -99,26 +99,26 @@
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{7b005276-0512-57c4-858c-cf62372252c1}",
-                "hidden": true,
-                "name": "Developer Command Prompt for VS 2019",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{7e947c12-4ad7-5c6c-91fe-14d86cd5a127}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2019",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
                 "guid": "{84c49153-486b-5abb-a374-7ff1bea03282}",
                 "hidden": true,
                 "name": "Developer Command Prompt for VS 2017",
                 "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
+                "hidden": true,
+                "name": "Ubuntu-22.04",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{d7b20cea-47a9-518c-95a4-c8bd91e2e1c6}",
+                "hidden": false,
+                "name": "Ubuntu 22.04.2 LTS",
+                "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#0C0C0C",
@@ -305,6 +305,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-22.04-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#2C001E",
             "black": "#4E9A06",
             "blue": "#3465A4",
@@ -350,5 +373,6 @@
             "white": "#C0C0C0",
             "yellow": "#808000"
         }
-    ]
+    ],
+    "themes": []
 }
