@@ -13,7 +13,7 @@ Set-Alias -Name msbuild -Value MsBuild2022
 function Alias-Hierarchy {
     $root = Get-GitRoot
     $current = $(git rev-parse --show-prefix).Replace('/', '\').Replace('.', '_').TrimEnd('\')
-    msbuild "$root\Build\Hierarchy.proj" "-P:PostBuildEvent=" "-T:$current" @args
+    msbuild "$root\Build\Build.proj" "-P:PostBuildEvent=" "-T:$current" @args
 }
 Set-Alias -Name hierarchy -Value Alias-Hierarchy
 Set-Alias -Name buildrel -Value Alias-Hierarchy
@@ -21,7 +21,7 @@ Set-Alias -Name buildrel -Value Alias-Hierarchy
 function Alias-HierarchyPreview {
     $root = Get-GitRoot
     $current = $(git rev-parse --show-prefix).Replace('/', '\').Replace('.', '_').TrimEnd('\')
-    msbuildpreview "$root\Build\Hierarchy.proj" "-P:PostBuildEvent=" "-T:$current" @args
+    msbuildpreview "$root\Build\Build.proj" "-P:PostBuildEvent=" "-T:$current" @args
 }
 Set-Alias -Name hierarchypreview -Value Alias-HierarchyPreview
 
@@ -45,7 +45,7 @@ Set-Alias -Name builddbgweb -Value Alias-BuildDbgWeb
 function Alias-HierarchyNC {
     $root = Get-GitRoot
     $current = $(git rev-parse --show-prefix).Replace('/', '\').Replace('.', '_').TrimEnd('\')
-    msbuild "$root\Build\Hierarchy.netcore.proj" "-P:PostBuildEvent=" "-P:NetCore=true" "-T:$current" @args
+    msbuild "$root\Build\Build.proj" "-P:PostBuildEvent=" "-P:NetCore=true" "-T:$current" @args
 }
 Set-Alias -Name hierarchync -Value Alias-HierarchyNC
 Set-Alias -Name buildrelnc -Value Alias-HierarchyNC

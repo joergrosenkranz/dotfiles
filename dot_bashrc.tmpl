@@ -37,7 +37,7 @@ fi
 if (uname -a | grep WSL2 > /dev/null); then
     # create an alias for docker to avoid using the Windows binary
     alias docker=/usr/bin/docker
-    
+
     # start Docker daemon
     if [ -n "`service docker status | grep not`" ]; then
         sudo /usr/sbin/service docker start
@@ -62,9 +62,9 @@ fi
 alias msbuild="/c/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Professional/MSBuild/Current/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
 alias msbuildpreview="/c/Program\ Files/Microsoft\ Visual\ Studio/2022/Enterprise/MSBuild/Current/Bin/MSBuild.exe -nologo -m -P:VI_PROJECTDIR=\$(git rev-parse --show-toplevel | sed -e 's|/|\\\\|g')"
 
-alias hierarchy="msbuild \$(git rev-parse --show-toplevel)/Build/Hierarchy.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
-alias hierarchync="msbuild \$(git rev-parse --show-toplevel)/Build/Hierarchy.netcore.proj -P:PostBuildEvent=\"\" -P:NetCore=true -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
-alias hierarchypreview="msbuildpreview \$(git rev-parse --show-toplevel)/Build/Hierarchy.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
+alias hierarchy="msbuild \$(git rev-parse --show-toplevel)/Build/Build.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
+alias hierarchync="msbuild \$(git rev-parse --show-toplevel)/Build/Build.proj -P:PostBuildEvent=\"\" -P:NetCore=true -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
+alias hierarchypreview="msbuildpreview \$(git rev-parse --show-toplevel)/Build/Build.proj -P:PostBuildEvent=\"\" -T:\$(git rev-parse --show-prefix | sed 's/\/$//;s/\//\\\\/g;s/\./_/g')"
 alias buildrel="hierarchy"
 alias builddbg="hierarchy -P:VICFG=DEBUG -P:BUILD_WEB=no"
 alias buildrelnc="hierarchync"
