@@ -210,6 +210,7 @@ function frg {
             --preview "bat --color=always {1} --theme='Solarized (light)' --highlight-line {2}" `
             --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
     if ($result) {
-        & ($env:EDITOR).Trim("`"'") $result.Split(': ')[0]
+        $parts = $result.Split(':')
+        & code -g "$($parts[0]):$($parts[1])"
     }
 }
