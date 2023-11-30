@@ -34,6 +34,8 @@
 	squash = !sh -c 'git commit --squash=$1' -
 	ri = rebase --interactive --autosquash
 	po = push origin HEAD
+	fza = "!git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add"
+
 [push]
 	default = tracking
 
