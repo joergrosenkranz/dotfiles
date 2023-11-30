@@ -201,3 +201,15 @@ Microsoft.PowerShell.Core\Register-ArgumentCompleter -CommandName Change-Branch 
 }
 
 Set-Alias -Name cb -Value Change-Branch
+
+function frg {
+    $result = rg --ignore-case --color=always --line-number --no-heading @Args |
+        fzf --ansi `
+            --color 'hl:-1:underline,hl+:-1:underline:reverse' `
+            --delimiter ':' `
+            --preview "bat --color=always {1} --theme='Solarized (light)' --highlight-line {2}" `
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
+    if ($result) {
+        & ($env:EDITOR).Trim("`"'") $result.Split(': ')[0]
+    }
+}
