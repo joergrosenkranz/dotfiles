@@ -1,7 +1,7 @@
 # Alias definitions
 
 function MsBuild2022 {
-    & "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
+    & "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\amd64\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
 }
 
 function Get-GitRoot () {
