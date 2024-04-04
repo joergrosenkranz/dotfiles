@@ -35,7 +35,7 @@
 	ri = rebase --interactive --autosquash
 	po = push origin HEAD
 	fadd = "!git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add"
-	fco = "!git branch --no-color $1 | sed 's/.* //'  | sed 's#remotes/##' | fzf --print0 | xargs -0 git checkout"
+	fco = "!git checkout $(git branch --sort=-committerdate --no-merged | fzf)"
 
 [push]
 	default = tracking
