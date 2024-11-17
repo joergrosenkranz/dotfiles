@@ -93,11 +93,11 @@ alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/
 
 alias cb=change-branch
 
-_worktrees() {
-	__gitcomp "$(git worktree list | sed 's/^.*\[\(.*\)\].*$/\1/g' | grep "^$1")"
-}
-
-__git_complete cb _worktrees
+# _worktrees() {
+# 	__gitcomp "$(git worktree list | sed 's/^.*\[\(.*\)\].*$/\1/g' | grep "^$1")"
+# }
+# 
+# __git_complete cb _worktrees
 
 docker()
 {
