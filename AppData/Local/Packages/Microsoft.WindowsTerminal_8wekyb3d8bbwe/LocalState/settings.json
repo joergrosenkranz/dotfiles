@@ -48,14 +48,14 @@
                 "guid": "{5d886f68-d1de-4075-bea4-11f3a1782fbf}",
                 "hidden": false,
                 "name": "Git Bash",
-                "startingDirectory": "C:\\git\\Main"
+                "startingDirectory": "C:\\git\\IM\\src"
             },
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore",
-                "startingDirectory": "C:\\git\\Main"
+                "startingDirectory": "C:\\git\\IM\\src"
             },
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -78,7 +78,7 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",
-                "startingDirectory": "C:\\git\\Main"
+                "startingDirectory": "C:\\git\\IM\\src"
             },
             {
                 "guid": "{f7900814-dc9b-5f76-a4bc-65789c05a4eb}",
