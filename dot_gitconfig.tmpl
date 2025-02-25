@@ -37,15 +37,33 @@
 	fadd = "!git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add"
 	fco = "!git checkout $(git branch --sort=-committerdate --no-merged | fzf)"
 
+[i18n]
+	commitencoding = utf-8
+
 [push]
 	default = tracking
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
 
 {{ if eq .chezmoi.os "darwin" -}}
 [core]
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 {{ else if eq .chezmoi.os "linux" -}}
 [core]
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 {{ else if eq .chezmoi.os "windows" -}}
 [core]
 	autocrlf = false
@@ -62,6 +80,10 @@
 [diff]
 	guitool = winmerge
 	tool = winmerge
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [difftool "winmerge"]
 	path = c:/Program Files (x86)/winmerge/winmergeu.exe
 	cmd = \"c:/Program Files (x86)/winmerge/winmergeu.exe\" \"$LOCAL\" \"$REMOTE\"
@@ -89,7 +111,8 @@
 [mergetool]
 	keepBackup = false
 
-[i18n]
-	commitencoding = utf-8
-
+[maintenance]
+	repo = {{ .repo_root }}
+[scalar]
+	repo = {{ .repo_root }}
 {{ end -}}
