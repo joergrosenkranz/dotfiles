@@ -1,3 +1,6 @@
 {{- $email := promptString "email" -}}
+{{- $repo_root := promptString "repo_root" -}}
+
 [data]
     email = {{ $email | quote }}
+    repo_root = {{ $repo_root | quote }}
