@@ -1,14 +1,14 @@
 # Alias definitions
 
-function MsBuild2022 {
-    & "C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\amd64\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
+function MsBuild2026 {
+    & "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\amd64\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
 }
 
 function Get-GitRoot () {
     return $(git rev-parse --show-toplevel)
 }
 
-Set-Alias -Name msbuild -Value MsBuild2022
+Set-Alias -Name msbuild -Value MsBuild2026
 
 function Alias-Hierarchy {
     $root = Get-GitRoot
@@ -214,3 +214,4 @@ function frg {
         & code -g "$($parts[0]):$($parts[1])"
     }
 }
+
