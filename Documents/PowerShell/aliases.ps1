@@ -1,14 +1,25 @@
 # Alias definitions
 
-function MsBuild2026 {
-    & "C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\amd64\MSBuild.exe" -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
+function MsBuildLatest {
+    $vswherePath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+
+    if (Test-Path $vswherePath) {
+        $msbuildPath = & $vswherePath -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | Select-Object -First 1
+
+        if (!$msbuildPath) {
+            $msbuildPath ="C:\Program Files\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\amd64\MSBuild.exe"
+        }
+    }
+
+    # Fallback to hardcoded path
+    & $msbuildPath -nologo -m -P:VI_PROJECTDIR="$(git rev-parse --show-toplevel)" @args
 }
 
 function Get-GitRoot () {
     return $(git rev-parse --show-toplevel)
 }
 
-Set-Alias -Name msbuild -Value MsBuild2026
+Set-Alias -Name msbuild -Value MsBuildLatest
 
 function Alias-Hierarchy {
     $root = Get-GitRoot
