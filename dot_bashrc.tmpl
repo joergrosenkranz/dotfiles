@@ -145,3 +145,8 @@ source ~/.scripts/aliases.sh
 
 # Load Angular CLI autocompletion.
 source <(ng completion script)
+
+# Add .dotnet folder to PATH, if it exists
+if [ -d "$HOME/.dotnet" ]; then
+    PATH="$HOME/.dotnet:$PATH"
+fi
