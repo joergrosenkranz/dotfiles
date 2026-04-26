@@ -27,7 +27,7 @@
 	bd = branch -d
 	zip = "!!f() { git archive -o $1.zip HEAD -- $1; }; f"
 	fn = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=local --grep
-	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	ignore = "!gi() { curl -L -s https://www.toptal.com/developers/gitignore/api/$@ ;}; gi"
 	unignore = update-index --no-assume-unchanged
 	ignored = !git ls-files -v | grep '^[a-z]'
 	fixup = !sh -c 'git commit --fixup=$1' -

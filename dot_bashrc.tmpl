@@ -89,7 +89,7 @@ alias lastbranch="git reflog | grep -m 1 -oP '(?<=checkout: moving from )\K.*(?=
 alias rm-lastbranch="git branch -d \$(lastbranch)"
 
 alias runmono="docker run -it --rm -v $PWD:/asm -w /asm mono:latest"
-alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/core/runtime:latest"
+alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/runtime:latest"
 
 alias cb=change-branch
 
@@ -144,9 +144,4 @@ change-branch() {
 source ~/.scripts/aliases.sh
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
-
-# Add .dotnet folder to PATH, if it exists
-if [ -d "$HOME/.dotnet" ]; then
-    PATH="$HOME/.dotnet:$PATH"
-fi
+command -v ng &>/dev/null && source <(ng completion script)

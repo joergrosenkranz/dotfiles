@@ -158,7 +158,7 @@ function Run-Mono {
 
 function Run-Core {
     $P = $PWD.Path.Replace('\', '/')
-    docker run -it --rm -v "$($P):/asm" -w /asm mcr.microsoft.com/dotnet/core/runtime:latest @args
+    docker run -it --rm -v "$($P):/asm" -w /asm mcr.microsoft.com/dotnet/runtime:latest @args
 }
 
 

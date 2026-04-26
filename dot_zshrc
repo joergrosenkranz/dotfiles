@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.scripts/aliases.sh
 
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/opt/homebrew/share/zsh-completions $fpath)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
