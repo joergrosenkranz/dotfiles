@@ -23,7 +23,24 @@ To update the files on any machine:
 chezmoi update
 ```
 
-A potential chocolatey install:
+## Install a Windows machine
+
+* Make Windows Terminal the default terminal program.
+
+```
+winget install pwsh twpayne.chezmoi vscode JanDeDobbeleer.OhMyPosh Git.Git 
+chezmoi init https://github.com/joergrosenkranz/dotfiles.git
+chezmoi apply
+```
+Download and install the Iosevka Term font from https://github.com/be5invis/Iosevka/.
+
+Download the PowerShell modules:
+```
+Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module -Name posh-git 
+```
+
+The old obsolete chocolatey install:
 ```sh
 cinst -y 7zip 7zip.install ag astrogrep autohotkey autohotkey.install autohotkey.portable autoruns azure-cli chezmoi croc devaudit devtoys dive dnspy docfx docker-compose docker-engine dotnet-7.0-sdk dotnet-7.0-sdk-1xx dotnetfx FiraCode Firefox fusionplusplus gimp gitui GitVersion.Portable graphviz hxd ilspy jetbrains-rider kdiff3 keepassxc kubernetes-cli lazygit MarkdownMonster.Portable mdcat mRemoteNG msbuild-structured-log-viewer choco install nerd-fonts-iosevka nodejs-lts notepadplusplus notepadplusplus.install NugetPackageExplorer oh-my-posh perfview poshgit powertoys procexp procmon ripgrep rsync sharex SQLite tailblazer terminal-icons.powershell tortoisegit winmerge wireshark zoomit
 ```
