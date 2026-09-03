@@ -50,7 +50,6 @@ if [ -d ~/.dotnet ]; then
 fi
 
 # Vars
-# export REQUESTS_CA_BUNDLE=~/quest-forest-root.crt.cer
 
 # Alias definitions
 
@@ -88,9 +87,6 @@ alias root="cd \$(git rev-parse --show-toplevel)"
 alias lastbranch="git reflog | grep -m 1 -oP '(?<=checkout: moving from )\K.*(?= to)'"
 alias rm-lastbranch="git branch -d \$(lastbranch)"
 
-alias runmono="docker run -it --rm -v $PWD:/asm -w /asm mono:latest"
-alias runnet="docker run -it --rm -v $PWD:/asm -w /asm mcr.microsoft.com/dotnet/runtime:latest"
-
 alias cb=change-branch
 
 # _worktrees() {
@@ -98,13 +94,6 @@ alias cb=change-branch
 # }
 # 
 # __git_complete cb _worktrees
-
-docker()
-{
-	export MSYS_NO_PATHCONV=1
-	("docker.exe" "$@")
-	export MSYS_NO_PATHCONV=0
-}
 
 build-hotfix()
 {
