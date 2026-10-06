@@ -41,7 +41,7 @@
 	commitencoding = utf-8
 
 [push]
-	default = tracking
+	default = simple
 	autoSetupRemote = true
 [pull]
 	rebase = true
@@ -111,4 +111,10 @@
 [mergetool]
 	keepBackup = false
 
+[credential "https://github.com"]
+       helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+[credential "https://gist.github.com"]
+       helper = !'C:\\Program Files\\GitHub CLI\\gh.exe' auth git-credential
+[branch]
+       autoSetupMerge = simple
 {{ end -}}
